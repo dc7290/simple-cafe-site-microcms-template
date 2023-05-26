@@ -1,0 +1,52 @@
+---
+import UnderPageLayout from "@layouts/UnderPageLayout.astro";
+---
+
+<UnderPageLayout
+  mainLabel="CONTACT"
+  subLabel="お問い合わせ"
+  title="お問い合わせ"
+>
+  <form
+    method="post"
+    action={import.meta.env.FORM_URL}
+    class="mx-auto max-w-3xl space-y-6"
+  >
+    <div class="space-y-2">
+      <label for="name" class="block text-xl">お名前:</label>
+      <input
+        class="w-full border border-gray-300 p-2"
+        id="name"
+        type="text"
+        name="お名前"
+        placeholder="例）山田太郎"
+        required
+      />
+    </div>
+    <div class="space-y-2">
+      <label for="email" class="block text-xl">メールアドレス:</label>
+      <input
+        class="w-full border border-gray-300 p-2"
+        id="email"
+        type="email"
+        name="email"
+        placeholder="例）example@example.com"
+        required
+      />
+    </div>
+    <div class="space-y-2">
+      <label for="body">お問い合わせ内容</label>
+      <textarea
+        id="body"
+        name="お問い合わせ内容"
+        class="h-48 w-full border border-gray-300 p-2"
+        required></textarea>
+    </div>
+    <button
+      type="submit"
+      class="w-full bg-main px-4 py-3 text-lg font-bold text-white"
+    >
+      送信
+    </button>
+  </form>
+</UnderPageLayout>

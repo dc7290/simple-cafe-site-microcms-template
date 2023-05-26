@@ -1,0 +1,186 @@
+---
+import type { News } from "src/types/microcms/news";
+
+import { Picture } from "@astrojs/image/components";
+
+import Layout from "@layouts/Layout.astro";
+import TextImage from "@components/TextImage.astro";
+import FormatedDate from "@components/FormatedDate.astro";
+import { client } from "@libs/microcms";
+
+import mainTextImage from "@images/top/main-text.svg";
+import aboutTextImage from "@images/top/about-text.svg";
+import servicesTextImage from "@images/top/services-text.svg";
+import newsTextImage from "@images/top/news-text.svg";
+import InternalAnchor from "@components/InternalAnchor.astro";
+
+const { contents: news } = await client.getList<News>({
+  endpoint: "news",
+  queries: { limit: 3, fields: "id,title,thumbnail,createdAt,publishedAt" },
+});
+---
+
+<Layout>
+  <div class="relative">
+    <div
+      class="flex w-11/12 flex-col items-start self-end sm:absolute sm:right-0 sm:top-1/2 sm:z-10 sm:-mt-5 sm:w-[45%] sm:-translate-y-1/2 sm:items-center lg:w-2/5"
+    >
+      <TextImage {...mainTextImage} alt="" class="w-full" />
+      <h1
+        class="flex flex-col items-start pl-6 sm:items-center sm:pl-0 sm:text-sm lg:text-lg"
+      >
+        <span>日常に彩りを添える</span>
+        <span>あなたのお気に入りの場所</span>
+      </h1>
+    </div>
+    <div class="relative mt-8 w-5/6 sm:mt-0 sm:w-7/12 md:w-3/5 lg:w-2/3">
+      <Picture
+        src={import("@images/top/main.png")}
+        widths={[800, 1200, 1600]}
+        width={1026}
+        height={660}
+        loading="eager"
+        sizes="66.666vw"
+        alt=""
+      />
+      <div
+        class="absolute -right-6 bottom-2/3 flex sm:-bottom-8 sm:left-2/3 sm:right-auto sm:block lg:-bottom-12 xl:-bottom-16"
+      >
+        <div class="h-px w-6 bg-white sm:h-8 sm:w-px lg:h-12 xl:h-16"></div>
+        <div class="h-px w-6 bg-main sm:h-8 sm:w-px lg:h-12 xl:h-16"></div>
+      </div>
+    </div>
+  </div>
+
+  <section
+    class="relative mt-20 sm:mr-10 sm:mt-28 sm:flex md:mt-28 lg:mr-24 lg:mt-32 xl:mr-40 xl:mt-40 2xl:mt-52"
+  >
+    <div class="sm:relative sm:z-10 sm:flex-1">
+      <TextImage
+        {...aboutTextImage}
+        class="ml-6 w-[12.5rem] origin-bottom-left scale-75 drop-shadow-[0_0_24px_rgba(255,255,255,0.24)] sm:ml-10 md:ml-14 md:scale-90 lg:ml-28 lg:scale-100 xl:ml-44"
+        alt=""
+      />
+      <h2
+        class="-mt-1.5 mr-10 flex flex-col items-start bg-secondary/90 py-8 pl-6 text-white sm:-mr-8 sm:-mt-2 sm:py-10 sm:pl-10 sm:pr-8 md:py-14 md:pl-14 lg:-mr-12 lg:py-16 lg:pl-28 lg:pr-12 xl:pl-44"
+      >
+        <span
+          class="font-english text-xl font-extrabold sm:text-2xl lg:text-3xl"
+          >Thoughts of the owner</span
+        >
+        <span>オーナーの想い</span>
+      </h2>
+      <p
+        class="py-8 pl-6 pr-10 sm:pb-0 sm:pl-10 sm:pr-6 sm:pt-6 md:pl-14 md:pr-10 lg:pl-28 lg:pr-16 lg:pt-12 xl:pl-44"
+      >
+        私たちがRelaxCafeを始めたきっかけは、単純なものでした。ただ、人々が日常生活の喧騒から少し離れて、自分だけの時間を楽しむことができる場所を提供したい、という一心でした。私たちの夢は、一人でも多くの人々に笑顔を届けること。その想いからRelaxCafeは生まれました。
+        <br /><br />
+        開業当初は、喫茶店経営の難しさを思い知らされる毎日でした。しかし、それを乗り越えるたびに私たちの絆は深まり、RelaxCafeの一員としての誇りを感じることができました。それぞれの困難を乗り越えることで、私たちの喫茶店は一つひとつ成長を遂げてきました。
+        <br /><br />
+        そして何よりも、お客様との出会いが私たちの喜びであり、励みです。お客様からの温かい言葉や、満足そうな表情を見るたび、私たちは喫茶店を続ける理由を改めて感じています。これからも私たちは、あなたの日常に小さな幸せを添える喫茶店であり続けます。
+      </p>
+    </div>
+    <div class="pl-6 sm:w-1/3 sm:max-w-none sm:pl-0 md:w-2/5">
+      <Picture
+        src={import("@images/top/about.png")}
+        widths={[480, 960, 1440]}
+        width={468}
+        height={651}
+        sizes="30rem"
+        alt=""
+      />
+    </div>
+  </section>
+
+  <section
+    class="relative mt-20 sm:ml-10 sm:mt-20 sm:flex md:mt-28 lg:ml-28 lg:mt-32 xl:ml-44 xl:mt-40 2xl:mt-52"
+  >
+    <div class="sm:relative sm:z-10 sm:order-2 sm:-mt-10 sm:flex-1 md:-mt-2">
+      <TextImage
+        {...servicesTextImage}
+        class="ml-6 w-[16.625rem] origin-bottom-left scale-75 drop-shadow-[0_0_24px_rgba(255,255,255,0.24)] sm:ml-10 md:scale-100 lg:ml-16"
+        alt=""
+      />
+      <h2
+        class="md:pl- -mt-1.5 mr-10 flex flex-col items-start bg-secondary/90 py-8 pl-6 text-white sm:-ml-8 sm:-mt-2 sm:mr-0 sm:p-10 sm:pl-14 md:p-14 md:pl-[4.5rem] lg:-ml-12 lg:py-16 lg:pl-28 lg:pr-24 xl:pr-40"
+      >
+        <span
+          class="font-english text-xl font-extrabold sm:text-2xl lg:text-3xl"
+          >What is important</span
+        >
+        <span>大切にしていること</span>
+      </h2>
+      <p
+        class="py-8 pl-6 pr-10 sm:pb-0 sm:pl-6 sm:pr-10 sm:pt-6 md:pl-10 md:pr-14 lg:pl-16 lg:pr-24 lg:pt-12 xl:pr-40"
+      >
+        RelaxCafeが最も大切にしていることは、"品質"と"お客様の満足"です。それぞれのメニューに使用する素材には厳選されたものを用い、その素材本来の味を最大限に活かすことを心がけています。また、新鮮な食材を提供するため、可能な限り地元の農産物を使用することにもこだわっています。
+        <br /><br />
+        次に、お客様へのサービス精神については、私たちは一人ひとりのお客様に最高の体験を提供することを目指しています。それは美味しいコーヒーや料理だけでなく、店内の雰囲気やスタッフの接客態度にも表れています。
+        <br /><br />
+        そして最後に、私たちは地域とのつながりを重視しています。地域の方々からの支援や応援なくして今のRelaxCafeは存在しないと断言できます。そのため、地域への感謝の気持ちを忘れず、地域貢献活動にも積極的に参加しています。
+        <br /><br />
+        これらのことを大切にすることで、私たちはRelaxCafeが「日常に彩りを添える、あなたのお気に入りの場所」であり続けることを願っています。
+      </p>
+    </div>
+    <div class="pl-6 sm:w-5/12 sm:pl-0 md:w-1/2 lg:w-[45%]">
+      <Picture
+        src={import("@images/top/services.png")}
+        widths={[480, 960, 1440]}
+        width={632}
+        height={569}
+        sizes="30rem"
+        alt=""
+      />
+    </div>
+  </section>
+
+  <section
+    class="relative mt-20 bg-secondary/90 py-8 text-white sm:mt-64 md:mt-[22.5rem] lg:py-16"
+  >
+    <TextImage
+      {...newsTextImage}
+      class="absolute left-10 top-1 w-24 -translate-y-full drop-shadow-[0_0_24px_rgba(255,255,255,0.24)] md:left-20 md:w-32 lg:left-40 lg:w-40"
+      alt=""
+    />
+    <div class="pl-10 sm:flex sm:justify-between md:pl-20 lg:pl-40">
+      <h2 class="mr-5 flex flex-none flex-col md:mr-10 lg:mr-20">
+        <span class="font-english text-xl font-extrabold lg:text-3xl"
+          >What's new</span
+        >
+        <span class="text-sm sm:text-base">新着情報</span>
+      </h2>
+      <ul
+        class="mt-8 grid flex-1 grid-cols-2 gap-8 sm:-mt-48 lg:grid-cols-3 xl:-mt-64"
+      >
+        {
+          news.map(({ id, title, thumbnail, publishedAt, createdAt }) => (
+            <li>
+              <a href={`/news/${id}`} class="block">
+                <div>
+                  <Picture
+                    src={thumbnail.url}
+                    widths={[320, 640, 960]}
+                    aspectRatio={1}
+                    width={320}
+                    height={320}
+                    sizes="20rem"
+                    alt=""
+                  />
+                </div>
+                <FormatedDate
+                  class="mt-2 font-english text-sm font-extrabold sm:mt-4 sm:text-base"
+                  date={publishedAt ?? createdAt}
+                />
+                <h3 class="text-xs sm:mt-2 sm:text-sm">{title}</h3>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="mt-10 flex justify-center sm:mt-16">
+      <InternalAnchor href="/news/1">MORE</InternalAnchor>
+    </div>
+  </section>
+</Layout>

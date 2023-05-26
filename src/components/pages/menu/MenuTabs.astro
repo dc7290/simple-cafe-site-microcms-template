@@ -1,0 +1,27 @@
+---
+import type { Menu } from "src/types/microcms/menu";
+import Tabs from "./Tabs/Tabs.svelte";
+
+export interface Props {
+  menu: {
+    morning: {
+      drink: Pick<Menu, "name" | "price" | "description" | "image">[];
+      food: Pick<Menu, "name" | "price" | "description" | "image">[];
+      desert: Pick<Menu, "name" | "price" | "description" | "image">[];
+    };
+    lunch: {
+      drink: Pick<Menu, "name" | "price" | "description" | "image">[];
+      food: Pick<Menu, "name" | "price" | "description" | "image">[];
+      desert: Pick<Menu, "name" | "price" | "description" | "image">[];
+    };
+    dinner: {
+      drink: Pick<Menu, "name" | "price" | "description" | "image">[];
+      food: Pick<Menu, "name" | "price" | "description" | "image">[];
+      desert: Pick<Menu, "name" | "price" | "description" | "image">[];
+    };
+  };
+}
+const { menu } = Astro.props;
+---
+
+<Tabs client:load menu={menu} />

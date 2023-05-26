@@ -1,0 +1,85 @@
+---
+import UnderPageLayout from "@layouts/UnderPageLayout.astro";
+import MenuTabs from "@components/pages/menu/MenuTabs.astro";
+import { client } from "@libs/microcms";
+import type { Menu } from "src/types/microcms/menu";
+import type { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
+
+const { totalCount } = await client.getList({
+  endpoint: "menu",
+  queries: { limit: 0 },
+});
+
+const menuList = (
+  await Promise.all(
+    Array.from({ length: Math.ceil(totalCount / 10) }).map(async (_, i) => {
+      const { contents } = await client.getList<Menu>({
+        endpoint: "menu",
+        queries: { limit: 10, offset: i * 10 },
+      });
+      return contents;
+    })
+  )
+).flat();
+
+const morningMenuList = menuList
+  .filter((menu) => menu.times.includes("モーニング"))
+  .sort((a, b) => a.times.length - b.times.length);
+const lunchMenuList = menuList
+  .filter((menu) => menu.times.includes("ランチ"))
+  .sort((a, b) => a.times.length - b.times.length);
+const dinnerMenuList = menuList
+  .filter((menu) => menu.times.includes("ディナー"))
+  .sort((a, b) => a.times.length - b.times.length);
+
+const pick = (array: (Menu & MicroCMSContentId & MicroCMSDate)[]) =>
+  array.map(
+    ({
+      name,
+      price,
+      description,
+      image,
+    }): Pick<Menu, "name" | "price" | "description" | "image"> => ({
+      name,
+      price,
+      description,
+      image,
+    })
+  );
+
+const menu = {
+  morning: {
+    drink: pick(
+      morningMenuList.filter((menu) => menu.kind.includes("ドリンク"))
+    ),
+    food: pick(morningMenuList.filter((menu) => menu.kind.includes("フード"))),
+    desert: pick(
+      morningMenuList.filter((menu) => menu.kind.includes("デザート"))
+    ),
+  },
+  lunch: {
+    drink: pick(lunchMenuList.filter((menu) => menu.kind.includes("ドリンク"))),
+    food: pick(lunchMenuList.filter((menu) => menu.kind.includes("フード"))),
+    desert: pick(
+      lunchMenuList.filter((menu) => menu.kind.includes("デザート"))
+    ),
+  },
+  dinner: {
+    drink: pick(
+      dinnerMenuList.filter((menu) => menu.kind.includes("ドリンク"))
+    ),
+    food: pick(dinnerMenuList.filter((menu) => menu.kind.includes("フード"))),
+    desert: pick(
+      dinnerMenuList.filter((menu) => menu.kind.includes("デザート"))
+    ),
+  },
+};
+---
+
+<UnderPageLayout mainLabel="MENU" subLabel="メニュー" title="メニュー">
+  <p>
+    RelaxCafeでは、「日常に彩りを添える」ことをテーマに、新鮮な食材を使用した手作りのメニューを提供しています。<br
+    />心地よい音楽と共に、美味しいお食事とドリンクをお楽しみください。
+  </p>
+  <MenuTabs menu={menu} />
+</UnderPageLayout>

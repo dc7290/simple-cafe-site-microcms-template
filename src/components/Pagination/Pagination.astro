@@ -1,0 +1,123 @@
+---
+import type { Page } from "astro";
+import type { HTMLAttributes } from "astro/types";
+import Anchor from "./Anchor.astro";
+
+export interface Props extends HTMLAttributes<"nav"> {
+  page: Page<{}>;
+}
+
+const { page, class: className, ...props } = Astro.props;
+let firstPages: number[] | null = null;
+let lastPages: number[] | null = null;
+let pages = Array.from({ length: page.lastPage })
+  .fill(0)
+  .map((_, i) => i + 1);
+if (pages.length > 6) {
+  if (page.currentPage < 4) {
+    firstPages = [1, 2, 3];
+    pages = pages.slice(page.lastPage - 2);
+  } else if (page.currentPage > page.lastPage - 3) {
+    lastPages = pages.slice(-3);
+    pages = pages.slice(0, 2);
+  } else {
+    firstPages = [1];
+    lastPages = [page.lastPage];
+    pages = [page.currentPage - 1, page.currentPage, page.currentPage + 1];
+  }
+}
+---
+
+<nav
+  {...props}
+  aria-label="ページナビゲーション"
+  class:list={["flex justify-center", className]}
+>
+  <ul class="flex items-center gap-1">
+    {
+      !!page.url.prev && (
+        <li>
+          <a
+            href={page.url.prev}
+            class="flex h-10 w-10 items-center justify-center rounded text-gray-500 transition-colors duration-300 sm:hover:bg-gray-100 sm:hover:text-gray-700"
+          >
+            <span class="sr-only">前のページ</span>
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </li>
+      )
+    }
+    {
+      firstPages?.map((pageNumber) => (
+        <li>
+          <Anchor page={page} pageNumber={pageNumber} />
+        </li>
+      ))
+    }
+    {
+      firstPages !== null && (
+        <li aria-hidden="true">
+          <span class="mx-2 text-xs">…</span>
+        </li>
+      )
+    }
+    {
+      pages.map((pageNumber) => (
+        <li>
+          <Anchor page={page} pageNumber={pageNumber} />
+        </li>
+      ))
+    }
+    {
+      lastPages !== null && (
+        <li aria-hidden="true">
+          <span class="mx-2 text-xs">…</span>
+        </li>
+      )
+    }
+    {
+      lastPages?.map((pageNumber) => (
+        <li>
+          <Anchor page={page} pageNumber={pageNumber} />
+        </li>
+      ))
+    }
+    {
+      !!page.url.next && (
+        <li>
+          <a
+            href={page.url.next}
+            class="flex h-10 w-10 items-center justify-center rounded text-gray-500 transition-colors duration-300 sm:hover:bg-gray-100 sm:hover:text-gray-700"
+          >
+            <span class="sr-only">次のページ</span>
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </a>
+        </li>
+      )
+    }
+  </ul>
+</nav>

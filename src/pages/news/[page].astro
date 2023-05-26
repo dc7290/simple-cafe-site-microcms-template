@@ -1,0 +1,70 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import type { News } from "src/types/microcms/news";
+
+import UnderPageLayout from "@layouts/UnderPageLayout.astro";
+import { client } from "@libs/microcms";
+import { Picture } from "@astrojs/image/components";
+import FormatedDate from "@components/FormatedDate.astro";
+import Pagination from "@components/Pagination/Pagination.astro";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const { totalCount } = await client.getList<News>({
+    endpoint: "news",
+    queries: { limit: 0 },
+  });
+
+  return paginate(
+    Array.from({ length: totalCount }).map(() => ({})),
+    { pageSize: 10 }
+  );
+};
+export interface Props {
+  page: Page;
+}
+const { page } = Astro.props;
+
+const { contents: news } = await client.getList<News>({
+  endpoint: "news",
+  queries: {
+    limit: 10,
+    offset: page.start,
+    fields: "id,title,thumbnail,createdAt,publishedAt",
+  },
+});
+---
+
+<UnderPageLayout mainLabel="NEWS" subLabel="お知らせ" title="お知らせ">
+  <ul class="mx-auto grid max-w-2xl grid-cols-1 gap-5 sm:gap-8">
+    {
+      news.map(({ id, title, thumbnail, createdAt, publishedAt }) => (
+        <li>
+          <a href={`/news/${id}`} class="flex">
+            <div class="mr-4 w-1/3 max-w-[10rem] flex-none">
+              <Picture
+                src={thumbnail.url}
+                widths={[320, 640, 960]}
+                aspectRatio={1}
+                width={320}
+                height={320}
+                sizes="20rem"
+                alt=""
+              />
+            </div>
+            <div class="sm:justify flex flex-1 flex-col justify-between sm:justify-center sm:gap-6">
+              <h2 class="line-clamp-3 text-sm leading-relaxed sm:text-lg">
+                {title}
+              </h2>
+              <FormatedDate
+                class="font-english text-xs sm:text-sm"
+                date={publishedAt ?? createdAt}
+              />
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <Pagination class="mt-16 sm:mt-24 lg:mt-32" page={page} />
+</UnderPageLayout>

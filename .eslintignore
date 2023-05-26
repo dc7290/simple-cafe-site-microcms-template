@@ -1,0 +1,5 @@
+# config
+astro.config.mjs
+postcss.config.js
+svelte.config.mjs
+tailwind.config.cjs

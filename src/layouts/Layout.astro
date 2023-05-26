@@ -1,0 +1,84 @@
+---
+import "@styles/global.css";
+
+import { SEO } from "astro-seo";
+
+import Menu from "@components/Menu/Menu.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const props = Astro.props;
+
+const BASE_TITLE = "RELAX CAFE";
+const title = props.title ? `${props.title} | ${BASE_TITLE}` : BASE_TITLE;
+const BASE_DESCRIPTION =
+  "心地よい空間でくつろぎながら、美味しいコーヒーと軽食をお楽しみいただけるRELAX CAFEへようこそ。";
+const description = props.description ?? BASE_DESCRIPTION;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      noindex={props.noindex ?? false}
+      charset="UTF-8"
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image: `${import.meta.env.SITE_URL}/og.png`,
+        },
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.ico" }],
+
+        meta: [
+          { name: "viewport", content: "width=device-width" },
+          { name: "twitter:card", content: "summary_large_image" },
+        ],
+      }}
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@500;800&family=Shippori+Mincho:wght@500;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="font-serif leading-loose text-main opacity-0 transition-opacity duration-700"
+  >
+    <Header />
+    <main class="mt-32 overflow-x-hidden sm:mt-40">
+      <slot />
+    </main>
+    <Footer />
+
+    <Menu />
+
+    <script>
+      import "@global/smallDevice";
+
+      document.body.style.opacity = "1";
+
+      // const internalLinks = document.querySelectorAll(
+      //   "a[href^='/']:not([href^='//'])"
+      // );
+      // internalLinks.forEach((link) => {
+      //   link.addEventListener("click", (e) => {
+      //     console.log("click");
+      //     document.body.style.opacity = "0";
+      //   });
+      // });
+    </script>
+  </body>
+</html>

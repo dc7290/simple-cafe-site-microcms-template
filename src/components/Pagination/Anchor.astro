@@ -1,0 +1,24 @@
+---
+import type { Page } from "astro";
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"a"> {
+  page: Page;
+  pageNumber: number;
+}
+const { page, pageNumber } = Astro.props;
+
+const isCurrent = pageNumber === page.currentPage;
+---
+
+<a
+  href={`/news/${pageNumber}`}
+  class:list={[
+    "flex h-10 w-10 items-center justify-center rounded text-gray-500 transition-colors duration-300 sm:hover:bg-gray-100 sm:hover:text-gray-700",
+    isCurrent && "bg-gray-100 text-gray-700",
+  ]}
+  aria-current={isCurrent ? "page" : undefined}
+>
+  {pageNumber}
+  <span class="sr-only">ページ</span>
+</a>

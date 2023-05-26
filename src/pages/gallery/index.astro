@@ -1,0 +1,33 @@
+---
+import { Picture } from "@astrojs/image/components";
+import UnderPageLayout from "@layouts/UnderPageLayout.astro";
+import { client } from "@libs/microcms";
+import type { Gallery } from "src/types/microcms/gallery";
+
+const { images } = await client.getObject<Gallery>({ endpoint: "gallery" });
+---
+
+<UnderPageLayout mainLabel="GALLERY" subLabel="ギャラリー" title="ギャラリー">
+  <p>
+    RelaxCafeへようこそ。以下に、私たちのカフェの魅力を伝えるための写真ギャラリーをご紹介します。これらの写真から、私たちが提供する心地よい空間とおいしい料理・ドリンクの一部をご覧いただけます。実際に店舗でこれらすべてをご体験いただくのが最良ではありますが、訪れる前の小さな予見としてご利用いただければ幸いです。
+  </p>
+  <ul
+    class="mt-20 grid grid-cols-1 gap-8 sm:mt-24 sm:block sm:columns-2 lg:mt-32 lg:columns-3 lg:gap-10"
+  >
+    {
+      images.map((image) => (
+        <li class="mt-10 first:mt-0">
+          <Picture
+            src={image.url}
+            widths={[320, 640, 960]}
+            aspectRatio={(image.width ?? 0) / (image.height ?? 0)}
+            width={image.width}
+            height={image.height}
+            sizes="90vw, (min-width: 640px) 40vw, (min-width: 1024px) 30vw"
+            alt=""
+          />
+        </li>
+      ))
+    }
+  </ul>
+</UnderPageLayout>

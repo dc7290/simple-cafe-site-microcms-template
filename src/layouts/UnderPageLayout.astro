@@ -1,0 +1,46 @@
+---
+import { Picture } from "@astrojs/image/components";
+
+import Layout from "./Layout.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+
+  mainLabel: string;
+  subLabel: string;
+}
+
+const { mainLabel, subLabel, ...props } = Astro.props;
+---
+
+<Layout {...props}>
+  <div class="relative h-80">
+    <Picture
+      src={import(`../images/${mainLabel.toLowerCase()}.png`)}
+      widths={[400, 800, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      width={1440}
+      height={320}
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-center"
+    />
+    <div
+      class="relative flex h-full w-full items-center justify-center bg-black/20"
+    >
+      <h1 class="flex flex-col justify-center text-center text-white">
+        <span class="font-english text-[2rem] font-medium text-white"
+          >{mainLabel}</span
+        >
+        <span class="font-sans text-base font-medium text-white"
+          >{subLabel}</span
+        >
+      </h1>
+    </div>
+  </div>
+  <div class="container py-16 sm:py-24 lg:py-32">
+    <slot />
+  </div>
+</Layout>

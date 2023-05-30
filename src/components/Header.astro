@@ -1,3 +1,7 @@
+---
+import { Image } from "@astrojs/image/components";
+---
+
 <header
   class="fixed inset-x-0 top-0 z-10 flex h-32 items-center justify-start pl-5 sm:h-40 sm:justify-start"
 >
@@ -23,11 +27,12 @@
     href="/"
     class="flex flex-col items-center transition-opacity duration-[0.4s] sm:absolute sm:inset-x-0 sm:mx-auto sm:w-40 sm:hover:opacity-70"
   >
-    <img
-      src="/logo.png"
+    <Image
+      src={import("@images/logo.png")}
       alt="ロゴ"
-      width="348"
-      height="319"
+      width={348}
+      height={319}
+      loading="eager"
       class="w-16 sm:w-20"
     />
     <p class="ml-2 font-english text-xs sm:ml-0 sm:mt-2 sm:text-base">

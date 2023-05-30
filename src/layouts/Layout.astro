@@ -54,9 +54,7 @@ const description = props.description ?? BASE_DESCRIPTION;
       rel="stylesheet"
     />
   </head>
-  <body
-    class="font-serif leading-loose text-main opacity-0 transition-opacity duration-700"
-  >
+  <body class="font-serif leading-loose text-main">
     <Header />
     <main class="mt-32 overflow-x-hidden sm:mt-40">
       <slot />
@@ -67,18 +65,6 @@ const description = props.description ?? BASE_DESCRIPTION;
 
     <script>
       import "@global/smallDevice";
-
-      document.body.style.opacity = "1";
-
-      // const internalLinks = document.querySelectorAll(
-      //   "a[href^='/']:not([href^='//'])"
-      // );
-      // internalLinks.forEach((link) => {
-      //   link.addEventListener("click", (e) => {
-      //     console.log("click");
-      //     document.body.style.opacity = "0";
-      //   });
-      // });
     </script>
   </body>
 </html>

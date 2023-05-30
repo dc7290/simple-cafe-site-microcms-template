@@ -1,55 +1,66 @@
-# Astro Starter Kit: Basics
+## シンプルな喫茶店の Web サイト
+
+![](cover.png)
+
+microCMS 公式のシンプルな喫茶店の Web サイトのテンプレートです。
+フレームワークには Astro を使用しているため軽量な Web サイトになっています。
+
+## 動作環境
+
+Node.js 18 以上
+
+## 環境変数の設定
+
+ルート直下に`.env`ファイルを作成し、下記の情報を入力してください。
 
 ```
-npm create astro@latest -- --template basics
+MICROCMS_API_KEY=xxxxxxxxxx
+MICROCMS_SERVICE_DOMAIN=xxxxxxxxxx
+SITE_URL=xxxxxxxxxx
+FORM_URL=xxxxxxxxxx
+GOOGLE_ANALYTICS_ID=xxxxxxxxxx
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+`MICROCMS_API_KEY`  
+microCMS 管理画面の「サービス設定 > API キー」から確認することができます。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+`MICROCMS_SERVICE_DOMAIN`  
+microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の部分です。
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+`SITE_URL`
+デプロイ先の URL です。プロトコルから記載してください。
 
+例） https://xxxxxxxx.vercel.app/ など
 
-## 🚀 Project Structure
+`FORM_URL`
+お問い合わせの送信先です。
+form タグの action に指定されます。
+なお、プレビューでは [HyperForm](https://hyperform.jp/)を利用しています。
 
-Inside of your Astro project, you'll see the following folders and files:
+`GOOGLE_ANALYTICS_ID`
+GA4 を使った GoogleAnalytics の測定 ID です。
+`@astrojs/partytown`が使用されているため、アナリティクスのために速度を犠牲にする必要はありません。
 
+## 開発の仕方
+
+1. パッケージのインストール
+
+```bash
+yarn
 ```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+
+2. 開発環境の起動
+
+```bash
+yarn dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+3. 開発環境へのアクセス
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+[http://localhost:3000](http://localhost:3000)にアクセス
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Vercel へのデプロイ
 
-## 🧞 Commands
+[Vercel Platform](https://vercel.com/new)から簡単にデプロイが可能です。
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+リポジトリを紐付け、環境変数を `Environment Variables` に登録しましょう。

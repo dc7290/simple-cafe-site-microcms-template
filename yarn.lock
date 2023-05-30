@@ -70,7 +70,7 @@
     unist-util-visit "^4.1.0"
     vfile "^5.3.2"
 
-"@astrojs/partytown@^1.2.2":
+"@astrojs/partytown@1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@astrojs/partytown/-/partytown-1.2.2.tgz#15641140b09f368bf5cc7a8f7fe1bc0227020188"
   integrity sha512-Df28kE+xExg+mc2jaPWgN3EYT9uvFmvWCHAuT3MUIxNBark9iVidOHFWNE5dy8+RfxpK3ryhvO5M18lK8OGvig==
@@ -665,7 +665,7 @@
     svelte-hmr "^0.15.1"
     vitefu "^0.2.4"
 
-"@tailwindcss/typography@^0.5.9":
+"@tailwindcss/typography@0.5.9":
   version "0.5.9"
   resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.9.tgz#027e4b0674929daaf7c921c900beee80dbad93e8"
   integrity sha512-t8Sg3DyynFysV9f4JDOVISGsjazNb48AeIYQwcL+Bsq5uf4RYL75C1giZ43KISjeDGBaTN3Kxh7Xj/vRSMJUUg==
@@ -1352,7 +1352,7 @@ cheerio-select@^2.1.0:
     domhandler "^5.0.3"
     domutils "^3.0.1"
 
-cheerio@^1.0.0-rc.12:
+cheerio@1.0.0-rc.12:
   version "1.0.0-rc.12"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.12.tgz#788bf7466506b1c6bf5fae51d24a2c4d62e47683"
   integrity sha512-VqR8m68vM46BNnuZ5NtnGBKIE/DfN0cRIzg9n40EIq9NOv90ayxLBXA8fXC5gquFRGJSTRqBq25Jt2ECLR431Q==
@@ -3952,7 +3952,7 @@ prettier-plugin-astro@0.8.1, prettier-plugin-astro@^0.8.1:
     sass-formatter "^0.7.5"
     synckit "^0.8.4"
 
-prettier-plugin-svelte@^2.10.0:
+prettier-plugin-svelte@2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/prettier-plugin-svelte/-/prettier-plugin-svelte-2.10.0.tgz#ce8f641f97cfe085fa093cb2beb13e64c5e7f9de"
   integrity sha512-GXMY6t86thctyCvQq+jqElO+MKdB09BkL3hexyGP3Oi8XLKRFaJP1ud/xlWCZ9ZIa2BxHka32zhHfcuU+XsRQg==

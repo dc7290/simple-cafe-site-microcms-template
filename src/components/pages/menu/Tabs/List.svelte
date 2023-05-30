@@ -1,4 +1,5 @@
 <script lang="ts">
+  import MicroCMSPicture from "@components/MicroCMSPicture.svelte";
   import type { Menu } from "src/types/microcms/menu";
 
   export let items: Pick<Menu, "name" | "price" | "description" | "image">[] =
@@ -14,9 +15,13 @@
       </div>
       <div class="text-sm">{item.description}</div>
       <div class="mt-4 max-w-[15rem]">
-        <img
-          src={`${item.image.url}?w=240&ar=1:1&fit=crop`}
-          srcset={`${item.image.url}?w=240&dpr=2&ar=1:1&fit=crop 2x, ${item.image.url}?w=240&dpr=3&ar=1:1&fit=crop 3x`}
+        <MicroCMSPicture
+          src={item.image.url}
+          imgixParams={{
+            fit: "crop",
+            ar: "1:1",
+          }}
+          widths={[240, 480, 720]}
           width={240}
           height={240}
           sizes="20rem"

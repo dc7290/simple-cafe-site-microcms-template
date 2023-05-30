@@ -1,0 +1,13 @@
+---
+import UnderPageLayout from "@layouts/UnderPageLayout.astro";
+
+import MenuTabsPreview from "@components/pages/menu/MenuTabsPreview.svelte";
+---
+
+<UnderPageLayout mainLabel="MENU" subLabel="メニュー" title="メニュー" noindex>
+  <p>
+    RelaxCafeでは、「日常に彩りを添える」ことをテーマに、新鮮な食材を使用した手作りのメニューを提供しています。<br
+    />心地よい音楽と共に、美味しいお食事とドリンクをお楽しみください。
+  </p>
+  <MenuTabsPreview client:only />
+</UnderPageLayout>

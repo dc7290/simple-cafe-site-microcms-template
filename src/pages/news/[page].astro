@@ -34,7 +34,12 @@ const { contents: news } = await client.getList<News>({
 });
 ---
 
-<UnderPageLayout mainLabel="NEWS" subLabel="お知らせ" title="お知らせ">
+<UnderPageLayout
+  mainLabel="NEWS"
+  subLabel="お知らせ"
+  title="お知らせ"
+  noindex={page.currentPage !== 1}
+>
   <ul class="mx-auto grid max-w-2xl grid-cols-1 gap-5 sm:gap-8 lg:gap-16">
     {
       news.map(({ id, title, thumbnail, createdAt, publishedAt }) => (

@@ -1,9 +1,9 @@
 ---
 import UnderPageLayout from "@layouts/UnderPageLayout.astro";
-import MenuTabs from "@components/pages/menu/MenuTabs.astro";
+import MenuTabs from "@components/pages/menu/MenuTabs.svelte";
 import { client } from "@libs/microcms";
 import type { Menu } from "src/types/microcms/menu";
-import type { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
+import { buildMenuObject } from "src/utils/buildMenuObject";
 
 const { totalCount } = await client.getList({
   endpoint: "menu",
@@ -22,58 +22,7 @@ const menuList = (
   )
 ).flat();
 
-const morningMenuList = menuList
-  .filter((menu) => menu.times.includes("モーニング"))
-  .sort((a, b) => a.times.length - b.times.length);
-const lunchMenuList = menuList
-  .filter((menu) => menu.times.includes("ランチ"))
-  .sort((a, b) => a.times.length - b.times.length);
-const dinnerMenuList = menuList
-  .filter((menu) => menu.times.includes("ディナー"))
-  .sort((a, b) => a.times.length - b.times.length);
-
-const pick = (array: (Menu & MicroCMSContentId & MicroCMSDate)[]) =>
-  array.map(
-    ({
-      name,
-      price,
-      description,
-      image,
-    }): Pick<Menu, "name" | "price" | "description" | "image"> => ({
-      name,
-      price,
-      description,
-      image,
-    })
-  );
-
-const menu = {
-  morning: {
-    drink: pick(
-      morningMenuList.filter((menu) => menu.kind.includes("ドリンク"))
-    ),
-    food: pick(morningMenuList.filter((menu) => menu.kind.includes("フード"))),
-    desert: pick(
-      morningMenuList.filter((menu) => menu.kind.includes("デザート"))
-    ),
-  },
-  lunch: {
-    drink: pick(lunchMenuList.filter((menu) => menu.kind.includes("ドリンク"))),
-    food: pick(lunchMenuList.filter((menu) => menu.kind.includes("フード"))),
-    desert: pick(
-      lunchMenuList.filter((menu) => menu.kind.includes("デザート"))
-    ),
-  },
-  dinner: {
-    drink: pick(
-      dinnerMenuList.filter((menu) => menu.kind.includes("ドリンク"))
-    ),
-    food: pick(dinnerMenuList.filter((menu) => menu.kind.includes("フード"))),
-    desert: pick(
-      dinnerMenuList.filter((menu) => menu.kind.includes("デザート"))
-    ),
-  },
-};
+const menuObject = buildMenuObject(menuList);
 ---
 
 <UnderPageLayout mainLabel="MENU" subLabel="メニュー" title="メニュー">
@@ -81,5 +30,5 @@ const menu = {
     RelaxCafeでは、「日常に彩りを添える」ことをテーマに、新鮮な食材を使用した手作りのメニューを提供しています。<br
     />心地よい音楽と共に、美味しいお食事とドリンクをお楽しみください。
   </p>
-  <MenuTabs menu={menu} />
+  <MenuTabs client:load menu={menuObject} />
 </UnderPageLayout>

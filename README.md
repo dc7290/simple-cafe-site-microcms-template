@@ -64,3 +64,13 @@ yarn dev
 [Vercel Platform](https://vercel.com/new)から簡単にデプロイが可能です。
 
 リポジトリを紐付け、環境変数を `Environment Variables` に登録しましょう。
+
+## 画面プレビューの設定
+
+このテンプレートでは「お知らせ」「メニュー」「ギャラリー」という microCMS の API が使用されています。
+これらすべて画面プレビューが利用可能です。
+そのためには microCMS の管理画面から URL の設定をする必要があります。
+https://document.microcms.io/manual/screen-preview
+
+このテンプレートを使用して作成したサービスにはすでに画面プレビュー用の URL が設定されています。
+ドメイン部分を実際にデプロイする先に合わせて変更ください。

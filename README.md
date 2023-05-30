@@ -27,17 +27,17 @@ microCMS 管理画面の「サービス設定 > API キー」から確認する�
 `MICROCMS_SERVICE_DOMAIN`  
 microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の部分です。
 
-`SITE_URL`
+`SITE_URL`  
 デプロイ先の URL です。プロトコルから記載してください。
 
 例） https://xxxxxxxx.vercel.app/ など
 
-`FORM_URL`
+`FORM_URL`  
 お問い合わせの送信先です。
 form タグの action に指定されます。
 なお、プレビューでは [HyperForm](https://hyperform.jp/)を利用しています。
 
-`GOOGLE_ANALYTICS_ID`
+`GOOGLE_ANALYTICS_ID`  
 GA4 を使った GoogleAnalytics の測定 ID です。
 `@astrojs/partytown`が使用されているため、アナリティクスのために速度を犠牲にする必要はありません。
 

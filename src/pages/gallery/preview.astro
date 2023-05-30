@@ -1,15 +1,16 @@
 ---
-import GalleryList from "@components/pages/gallery/GalleryList.svelte";
+import GalleryListPreview from "@components/pages/gallery/GalleryListPreview.svelte";
 import UnderPageLayout from "@layouts/UnderPageLayout.astro";
-import { client } from "@libs/microcms";
-import type { Gallery } from "src/types/microcms/gallery";
-
-const { images } = await client.getObject<Gallery>({ endpoint: "gallery" });
 ---
 
-<UnderPageLayout mainLabel="GALLERY" subLabel="ギャラリー" title="ギャラリー">
+<UnderPageLayout
+  mainLabel="GALLERY"
+  subLabel="ギャラリー"
+  title="ギャラリー"
+  noindex
+>
   <p>
     RelaxCafeへようこそ。以下に、私たちのカフェの魅力を伝えるための写真ギャラリーをご紹介します。これらの写真から、私たちが提供する心地よい空間とおいしい料理・ドリンクの一部をご覧いただけます。実際に店舗でこれらすべてをご体験いただくのが最良ではありますが、訪れる前の小さな予見としてご利用いただければ幸いです。
   </p>
-  <GalleryList images={images} />
+  <GalleryListPreview client:only />
 </UnderPageLayout>

@@ -10,7 +10,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  site: import.meta.env.SITE_URL,
+  site: import.meta.env.PUBLIC_SITE_URL,
   integrations: [
     preact(),
     tailwind(),

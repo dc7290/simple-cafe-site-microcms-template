@@ -14,7 +14,8 @@
       "@styles/*": ["src/styles/*"],
       "@images/*": ["src/images/*"],
       "@libs/*": ["src/libs/*"],
-      "@global/*": ["src/global/*"]
+      "@global/*": ["src/global/*"],
+      "@type/*": ["src/types/*"]
     }
   }
 }

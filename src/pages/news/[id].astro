@@ -1,13 +1,10 @@
 ---
 import type { News } from "src/types/microcms/news";
 
-import * as cheerio from "cheerio";
-
 import UnderPageLayout from "@layouts/UnderPageLayout.astro";
 import { client } from "@libs/microcms";
-import FormatedDate from "@components/FormatedDate.astro";
-import InternalAnchor from "@components/InternalAnchor.astro";
-import { Picture } from "@astrojs/image/components";
+import NewsBody from "@components/pages/news/NewsBody.svelte";
+import { processContent } from "src/utils/processContent";
 
 export const getStaticPaths = async () => {
   const { contents: news } = await client.getList<News>({
@@ -26,58 +23,9 @@ const content = await client.getListDetail<News>({
   contentId: id,
 });
 
-const $ = cheerio.load(content.body);
-
-$("h3").each((_, elem) => {
-  $(elem).replaceWith(`<h4>${$(elem).html()}</h4>`);
-});
-
-$("h2").each((_, elem) => {
-  $(elem).replaceWith(`<h3>${$(elem).html()}</h3>`);
-});
-
-$("h1").each((_, elem) => {
-  $(elem).replaceWith(`<h2>${$(elem).html()}</h2>`);
-});
-
-$("img").each((_, elem) => {
-  const originalSrc = $(elem).attr("src");
-  $(elem).attr("src", `${originalSrc}?w=960`);
-});
-
-content.body = $.html();
+content.body = processContent(content.body);
 ---
 
 <UnderPageLayout mainLabel="NEWS" subLabel="お知らせ" title="お知らせ">
-  <div class="mx-auto max-w-prose">
-    <h1 class="text-[1.75rem] font-bold leading-normal">
-      {content.title}
-    </h1>
-
-    <FormatedDate
-      date={content.publishedAt ?? content.createdAt}
-      class="mt-4 text-sm font-bold"
-    />
-
-    <div class="mx-auto mt-14 max-w-xs lg:max-w-md">
-      <Picture
-        src={content.thumbnail.url}
-        widths={[320, 640, 960]}
-        aspectRatio={1}
-        width={320}
-        height={320}
-        sizes="20rem"
-        alt=""
-      />
-    </div>
-
-    <div
-      class="prose mx-auto mt-20 max-w-[50ch] prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg sm:px-16 [&_*]:text-main"
-      set:html={content.body}
-    />
-
-    <div class="mt-20 flex justify-center">
-      <InternalAnchor href="/news/1" direction="left">BACK</InternalAnchor>
-    </div>
-  </div>
+  <NewsBody content={content} />
 </UnderPageLayout>

@@ -5,7 +5,7 @@ import type { News } from "src/types/microcms/news";
 import UnderPageLayout from "@layouts/UnderPageLayout.astro";
 import { client } from "@libs/microcms";
 import { Picture } from "@astrojs/image/components";
-import FormatedDate from "@components/FormatedDate.astro";
+import FormattedDate from "@components/FormattedDate.svelte";
 import Pagination from "@components/Pagination/Pagination.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
@@ -55,7 +55,7 @@ const { contents: news } = await client.getList<News>({
               <h2 class="line-clamp-3 text-sm leading-relaxed sm:text-lg">
                 {title}
               </h2>
-              <FormatedDate
+              <FormattedDate
                 class="font-english text-xs sm:text-sm"
                 date={publishedAt ?? createdAt}
               />

@@ -1,0 +1,8 @@
+---
+import NewsPreview from "@components/pages/news/NewsPreview.svelte";
+import UnderPageLayout from "@layouts/UnderPageLayout.astro";
+---
+
+<UnderPageLayout mainLabel="NEWS" subLabel="お知らせ" title="お知らせ">
+  <NewsPreview client:only />
+</UnderPageLayout>

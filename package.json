@@ -30,6 +30,7 @@
     "dayjs": "1.11.7",
     "microcms-js-sdk": "2.4.0",
     "preact": "10.13.2",
+    "sswr": "^1.10.0",
     "svelte": "3.54.0",
     "tailwindcss": "3.3.1"
   },

@@ -2,7 +2,7 @@
 
 ![](cover.png)
 
-microCMS 公式のシンプルな喫茶店の Web サイトのテンプレートです。
+microCMS 公式のシンプルな喫茶店の Web サイトのテンプレートです。  
 フレームワークには Astro を使用しているため軽量な Web サイトになっています。
 
 ## 動作環境
@@ -33,12 +33,12 @@ microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の�
 例） https://xxxxxxxx.vercel.app/ など
 
 `PUBLIC_FORM_URL`  
-お問い合わせの送信先です。
-form タグの action に指定されます。
+お問い合わせの送信先です。  
+form タグの action に指定されます。  
 なお、プレビューでは [HyperForm](https://hyperform.jp/)を利用しています。
 
 `PUBLIC_GOOGLE_ANALYTICS_ID`  
-GA4 を使った GoogleAnalytics の測定 ID です。
+GA4 を使った GoogleAnalytics の測定 ID です。  
 `@astrojs/partytown`が使用されているため、アナリティクスのために速度を犠牲にする必要はありません。
 
 ## 開発の仕方
@@ -67,10 +67,10 @@ yarn dev
 
 ## 画面プレビューの設定
 
-このテンプレートでは「お知らせ」「メニュー」「ギャラリー」という microCMS の API が使用されています。
-これらすべて画面プレビューが利用可能です。
-そのためには microCMS の管理画面から URL の設定をする必要があります。
+このテンプレートでは「お知らせ」「メニュー」「ギャラリー」という microCMS の API が使用されています。  
+これらすべて画面プレビューが利用可能です。  
+そのためには microCMS の管理画面から URL の設定をする必要があります。  
 https://document.microcms.io/manual/screen-preview
 
-このテンプレートを使用して作成したサービスにはすでに画面プレビュー用の URL が設定されています。
+このテンプレートを使用して作成したサービスにはすでに画面プレビュー用の URL が設定されています。  
 ドメイン部分を実際にデプロイする先に合わせて変更ください。

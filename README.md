@@ -1,6 +1,6 @@
 ## シンプルな喫茶店の Web サイト
 
-![](cover.png)
+![](_docimages/cover.png)
 
 microCMS 公式のシンプルな喫茶店の Web サイトのテンプレートです。  
 フレームワークには Astro を使用しているため軽量な Web サイトになっています。
@@ -64,6 +64,16 @@ yarn dev
 [Vercel Platform](https://vercel.com/new)から簡単にデプロイが可能です。
 
 リポジトリを紐付け、環境変数を `Environment Variables` に登録しましょう。
+
+### webhook の設定
+
+microCMS のコンテンツ更新があったタイミングで Vercel のデプロイをフックしましょう。
+https://document.microcms.io/manual/webhook-setting#h065a574f0d
+
+通知タイミングの設定は以下を参考にしてください。
+![](_docimages/webhook-settings.png)
+
+「お知らせ」「メニュー」「ギャラリー」の API で同様に設定します。
 
 ## 画面プレビューの設定
 

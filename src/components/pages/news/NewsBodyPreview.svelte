@@ -10,7 +10,7 @@
   const draftKey = params.get("draftKey");
 
   const { data: content } = useSWR(
-    !!contentId && !!draftKey ? `news:${contentId}` : undefined,
+    !!contentId ? `news:${contentId}` : undefined,
     {
       fetcher: async () => {
         if (!contentId || !draftKey) {

@@ -23,6 +23,8 @@ PUBLIC_GOOGLE_ANALYTICS_ID=xxxxxxxxxx
 
 `PUBLIC_MICROCMS_API_KEY`  
 microCMS 管理画面の「サービス設定 > API キー」から確認することができます。
+なお、画面プレビューで microCMS へのリクエストをクライアントサイドから行う関係で、API キーは公開されます。  
+そのため、API キーの権限については GET のみに設定してください。
 
 `PUBLIC_MICROCMS_SERVICE_DOMAIN`  
 microCMS 管理画面の URL（https://xxxxxxxx.microcms.io）の xxxxxxxx の部分です。
@@ -82,5 +84,11 @@ https://document.microcms.io/manual/webhook-setting#h065a574f0d
 そのためには microCMS の管理画面から URL の設定をする必要があります。  
 https://document.microcms.io/manual/screen-preview
 
-このテンプレートを使用して作成したサービスにはすでに画面プレビュー用の URL が設定されています。  
-ドメイン部分を実際にデプロイする先に合わせて変更ください。
+以下に画面プレビューの設定例を示しますのでドメイン部分を実際にデプロイする先に合わせて変更ください。
+
+- お知らせ
+  https://ドメイン/news/preview?contentId={CONTENT_ID}&draftKey={DRAFT_KEY}
+- メニュー
+  https://ドメイン/menu/preview?draftKey={DRAFT_KEY}
+- ギャラリー
+  https://ドメイン/gallery/preview?draftKey={DRAFT_KEY}

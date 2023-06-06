@@ -2,9 +2,18 @@
 import GalleryList from "@components/pages/gallery/GalleryList.svelte";
 import UnderPageLayout from "@layouts/UnderPageLayout.astro";
 import { client } from "@libs/microcms";
+import type { MicroCMSImage } from "microcms-js-sdk";
 import type { Gallery } from "src/types/microcms/gallery";
 
-const { images } = await client.getObject<Gallery>({ endpoint: "gallery" });
+let images: MicroCMSImage[] = [];
+
+try {
+  const content = await client.getObject<Gallery>({ endpoint: "gallery" });
+  images = content.images;
+} catch (e) {
+  // 初期状態で404が返ってくるので、エラーを握りつぶす
+  console.error(e);
+}
 ---
 
 <UnderPageLayout mainLabel="GALLERY" subLabel="ギャラリー" title="ギャラリー">

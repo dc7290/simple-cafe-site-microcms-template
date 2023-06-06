@@ -48,13 +48,13 @@ GA4 を使った GoogleAnalytics の測定 ID です。
 1. パッケージのインストール
 
 ```bash
-yarn
+npm i
 ```
 
 2. 開発環境の起動
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 3. 開発環境へのアクセス

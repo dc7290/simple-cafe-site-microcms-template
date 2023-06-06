@@ -55,7 +55,7 @@ const description = props.description ?? BASE_DESCRIPTION;
       rel="stylesheet"
     />
 
-    <GA4 />
+    {import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID && <GA4 />}
   </head>
   <body class="font-serif leading-loose text-main">
     <Header />
